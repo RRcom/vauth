@@ -1,4 +1,3 @@
-*
-!.gitignore
-!base_vauth.php
+config.php
+vauth.php
 

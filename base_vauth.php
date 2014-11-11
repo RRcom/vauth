@@ -1,10 +1,12 @@
-<?php // vauth client v0.9.8.1
+<?php // vauth client v0.9.9.0
 
 include __DIR__.'/EventOnSuccessLogin.php';
+require_once __DIR__.'/FbPage/AccountResult.php';
 
 class base_vauth {
 
     const FB_PERMISSION_USER_LIKES = 'user_likes';
+    const FB_PERMISSION_MANAGE_PAGE = 'manage_pages';
     
     const REQUEST_MODE_UNDEFINED = 0;
     const REQUEST_MODE_PUBLIC_PHOTOS = 1;
@@ -438,6 +440,32 @@ class base_vauth {
         if(isset($fb_result['error'])) return false;
         if(count($fb_result['data']) && ($fb_result['data'][0]['status'] == 'granted')) return true;
         return false;
+    }
+
+    /**
+     * List page account handle by this user
+     * @param int $offset
+     * @param int $limit
+     * @return AccountResult[]
+     * @throws Exception
+     */
+    public function fb_get_accounts($offset = 0, $limit = 30) {
+        $result = $this->CI->facebook->api('/me/accounts', 'GET', array(
+            'offset' => intval($offset),
+            'limit' => intval($limit))
+        );
+        if(isset($result['error'])) throw new Exception($result['error']['message']);
+        $objectArray = array();
+        if(isset($result['data'])) {
+            foreach($result['data'] as $page) {
+                $object = new AccountResult($page['id'], $page['access_token'], $this->CI->facebook);
+                $object->name = $page['name'];
+                $object->category = $page['category'];
+                $object->permission = $page['perms'];
+                $objectArray[] = $object;
+            }
+        }
+        return $objectArray;
     }
 
     // ================= Vigattin API tools =====================
