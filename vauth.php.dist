@@ -1,0 +1,183 @@
+<?php
+if(!class_exists('base_vauth')) {
+    include_once dirname(__FILE__).'/base_vauth.php';
+}
+
+class vauth extends base_vauth {
+    
+    /**
+     * Create login URL
+     * 
+     * @param string Url to redirect to after success login. Default to current URL if leave blank
+     * @param bool Use secure connection if TRUE
+     * @return string Generated URL
+     */
+    
+    public function get_login_url($redirect = '', $secure = FALSE) {
+        return parent::get_login_url($redirect, $secure);
+    }
+    
+    /**
+     * Create logout URL
+     * 
+     * @param string Url to redirect to after success logout. Default to current URL if leave blank
+     * @param bool Use secure connection if TRUE
+     * @return string Generated URL
+     */
+    
+    public function get_logout_url($redirect = '', $secure = FALSE) {
+        return parent::get_logout_url($redirect, $secure);
+    }
+    
+    /**
+     * Check if user was login
+     * 
+     * @return bool TRUE if login FALSE if not
+     */
+    
+    public function is_login() {
+        return parent::is_login();
+    }
+    
+    /**
+     * Force redirect to login page
+     * 
+     * @param string Url to redirect to after success login. Default to current URL if leave blank
+     * @param bool Use secure connection if TRUE
+     */
+    
+    public function login($redirect = '', $secure = FALSE) {
+        parent::login($redirect, $secure);
+    }
+    
+    /**
+     * Force redirect to logout page
+     * 
+     * @param string Url to redirect to after success logout. Default to current URL if leave blank
+     * @param bool Use secure connection if TRUE
+     */
+    
+    public function logout($redirect = '', $secure = FALSE) {
+        parent::logout($redirect, $secure);
+    }
+    
+    /**
+     * Get user facebook ID
+     * 
+     * @return int User facebook ID
+     */
+    
+    public function get_id() {
+        return parent::get_id();
+    }
+    
+    /**
+     * Get user ID from vigattin database
+     * 
+     * @return int User ID from vigattin database
+     */
+    
+    public function get_vigid() {
+        return parent::get_vigid();
+    }
+    
+    /**
+     * Get user email
+     * 
+     * @return string user email
+     */
+    
+    public function get_email() {
+        return parent::get_email();
+    }
+    
+    /**
+     * Get user first name
+     * 
+     * @return string user first name
+     */
+    
+    public function get_first_name() {
+        return parent::get_first_name();
+    }
+    
+    /**
+     * Get user last name
+     * 
+     * @return string user last name
+     */
+    
+    public function get_last_name() {
+        return parent::get_last_name();
+    }
+    
+    /**
+     * Get user profile photo
+     * 
+     * @return string profile photo URL
+     */
+    
+    public function get_profile_photo() {
+        return parent::get_profile_photo();
+    }
+    
+    /**
+     * Get user cover photo
+     * 
+     * @return string user cover photo URL
+     */
+    
+    public function get_cover_photo() {
+        return parent::get_cover_photo();
+    }
+    
+    /**
+     * Get cover photo offset y
+     * 
+     * @return int cover offset y
+     */
+    
+    public function get_offset_y() {
+        return parent::get_offset_y();
+    }
+    
+    /**
+     * Get user account type
+     * 
+     * @return string user account type
+     */
+    
+    public function get_type() {
+        return parent::get_type();
+    }
+    
+    /**
+     * Check if user email was real
+     * 
+     * @return int 1 if verified 0 if not
+     */
+    
+    public function get_verified() {
+        return parent::get_verified();
+    }
+    
+    /**
+     * Get user gender
+     * 
+     * @return string male or famale
+     */
+    
+    public function get_gender() {
+        return parent::get_gender();
+    }
+    
+    /**
+     * Get user birthday
+     * 
+     * @return int user birthday in epoch time
+     */
+    
+    public function get_birtday() {
+        return parent::get_birtday();
+    }
+}

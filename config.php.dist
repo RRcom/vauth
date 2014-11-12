@@ -1,0 +1,6 @@
+<?php
+return array(
+    'key' => '', // server communication encryption key 
+    'fb_app_id' => '', facebook application ID
+    'fb_app_secret' => '', facebook application secret key
+);
