@@ -1,5 +1,4 @@
-<?php // vauth client v0.9.9.1
-// add test comment
+<?php // vauth client v0.9.9.2
 include __DIR__.'/EventOnSuccessLogin.php';
 require_once __DIR__.'/FbPage/AccountResult.php';
 
@@ -196,11 +195,20 @@ class base_vauth {
     }
 
     /**
-     * @param string $permissions requested permission ex. user_likes or friends_photos, read_stream, publish_stream etc.
+     * @param string!array $permissions requested permission ex. user_likes or array('friends_photos', 'read_stream', 'publish_stream')
+     * @param string $redirect redirect back url after successful authentication
      * @return string url to connect to vigattin fb connect
      */
-    public function fb_request_token($permissions = '') {
-        return $this->AUTH_DOMAIN_FBCONNECT.'?permissions='.urlencode($permissions);
+    public function fb_request_token($permissions = '', $redirect = '') {
+        if((!is_array($permissions)) && ($permissions)) $permissions = array($permissions);
+        else $permissions = array();
+        $strPermission = '';
+        foreach($permissions as $value) {
+            if($value) $strPermission .= trim($value).',';
+        }
+        $strPermission = rtrim($strPermission, ',');
+        $redirect = $redirect ? '&rdrect='.urlencode($redirect) : '';
+        return $this->AUTH_DOMAIN_FBCONNECT.'?permissions='.urlencode($strPermission).$redirect;
     }
 
     /**
